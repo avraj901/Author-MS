@@ -17,4 +17,10 @@ public interface IAuthorService {
 	public void deleteBook(Integer studentId);
 	
 	Book updateBook(Book author, Integer id);
+	
+	Integer blockBook(Integer id, Boolean blockBook);
+	
+	public List<Book> getUnBlockBooks();
+	
+	public List<Book> getBlockBooks();
 }

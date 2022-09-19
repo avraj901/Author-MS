@@ -22,10 +22,11 @@ public class Book {
 	private Date   publishDate;
 	private Boolean active;
 	private String content;
+	private Boolean blockBook;
 
 
 	public Book(Integer id, String title, String category, String image, Double price, String author, String publisher,
-			Date publishDate, Boolean active, String content) {
+			Date publishDate, Boolean active, String content, Boolean blockBook) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -37,6 +38,17 @@ public class Book {
 		this.publishDate = publishDate;
 		this.active = active;
 		this.content = content;
+		this.blockBook = blockBook;
+	}
+
+
+	public Boolean getBlockBook() {
+		return blockBook;
+	}
+
+
+	public void setBlockBook(Boolean blockBook) {
+		this.blockBook = blockBook;
 	}
 
 

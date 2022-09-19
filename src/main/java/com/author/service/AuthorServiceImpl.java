@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.author.modal.Book;
+import com.author.modal.User;
 import com.author.exception.ResourceNotFoundException;
 
 @Service
@@ -14,6 +15,9 @@ public class AuthorServiceImpl implements IAuthorService{
 
 	@Autowired
 	IAuthorRepository authorRepository;
+	
+	@Autowired
+	IUserRepository userRepository;
 	
 	@Override
 	public Integer saveAuthor(Book author) {
@@ -52,5 +56,25 @@ public class AuthorServiceImpl implements IAuthorService{
 		authorRepository.save(existingBook);
 		return existingBook;
 	}
+
+	@Override
+	public Integer blockBook(Integer id, Boolean blockBook) {
+		
+		return authorRepository.blockBook(blockBook, id);
+		
+	}
+
+	@Override
+	public List<Book> getUnBlockBooks() {
+		return authorRepository.getAllUnBLockBooks();
+		
+	}
+
+	@Override
+	public List<Book> getBlockBooks() {
+		
+		return authorRepository.getAllBLockBooks();
+	}
+
 
 }

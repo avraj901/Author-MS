@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.author.modal.Book;
+import com.author.modal.User;
 import com.author.service.IAuthorService;
+import com.author.service.IUserService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -24,6 +27,9 @@ public class AuthorController {
 
 	@Autowired
 	IAuthorService authorService;
+
+	@Autowired
+	IUserService userService;
 
 	@PostMapping("/savebook")
 	public Integer createBook(@RequestBody Book book) {
@@ -57,4 +63,33 @@ public class AuthorController {
 	public ResponseEntity<Book> updateBook(@PathVariable("id") Integer id, @RequestBody Book book) {
 		return new ResponseEntity<Book>(authorService.updateBook(book, id), HttpStatus.OK);
 	}
+
+	@PostMapping("/saveuser")
+	public Integer createUser(@RequestBody User user) {
+		Integer id = userService.createUser(user);
+		return id;
+	}
+
+	@PostMapping("/login")
+	public Boolean loginUser(@RequestBody User login) {
+		String userName = login.getUsername();
+		String password = login.getPassword();
+		return userService.logInUser(userName, password);
+	}
+	
+	@PutMapping("/blockbook/{id}/{blockBook}")
+	public Integer blockBook(@PathVariable("id") Integer id, @PathVariable Boolean blockBook) {
+		System.out.println("Block book id"+id+"blockBook"+ blockBook);
+		return (authorService.blockBook(id, blockBook));
+	}
+	@GetMapping("/getunblockbooks")
+	public List<Book> getAllUnBlockBooks() {
+		return authorService.getUnBlockBooks();
+	}
+	
+	@GetMapping("/getblockbooks")
+	public List<Book> getAllBlockBooks() {
+		return authorService.getBlockBooks();
+	}
+
 }
