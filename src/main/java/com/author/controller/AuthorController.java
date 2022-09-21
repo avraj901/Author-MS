@@ -76,17 +76,18 @@ public class AuthorController {
 		String password = login.getPassword();
 		return userService.logInUser(userName, password);
 	}
-	
+
 	@PutMapping("/blockbook/{id}/{blockBook}")
 	public Integer blockBook(@PathVariable("id") Integer id, @PathVariable Boolean blockBook) {
-		System.out.println("Block book id"+id+"blockBook"+ blockBook);
+		System.out.println("Block book id" + id + "blockBook" + blockBook);
 		return (authorService.blockBook(id, blockBook));
 	}
+
 	@GetMapping("/getunblockbooks")
 	public List<Book> getAllUnBlockBooks() {
 		return authorService.getUnBlockBooks();
 	}
-	
+
 	@GetMapping("/getblockbooks")
 	public List<Book> getAllBlockBooks() {
 		return authorService.getBlockBooks();

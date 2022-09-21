@@ -11,14 +11,14 @@ import com.author.modal.User;
 import com.author.exception.ResourceNotFoundException;
 
 @Service
-public class AuthorServiceImpl implements IAuthorService{
+public class AuthorServiceImpl implements IAuthorService {
 
 	@Autowired
 	IAuthorRepository authorRepository;
-	
+
 	@Autowired
 	IUserRepository userRepository;
-	
+
 	@Override
 	public Integer saveAuthor(Book author) {
 		Book saveAuthor = authorRepository.save(author);
@@ -37,12 +37,13 @@ public class AuthorServiceImpl implements IAuthorService{
 
 	@Override
 	public void deleteBook(Integer studentId) {
-	 authorRepository.deleteById(studentId);
+		authorRepository.deleteById(studentId);
 	}
 
 	@Override
 	public Book updateBook(Book book, Integer id) {
-		Book existingBook = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
+		Book existingBook = authorRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
 		existingBook.setTitle(book.getTitle());
 		existingBook.setAuthor(book.getAuthor());
 		existingBook.setCategory(book.getCategory());
@@ -52,29 +53,23 @@ public class AuthorServiceImpl implements IAuthorService{
 		existingBook.setPublishDate(book.getPublishDate());
 		existingBook.setActive(book.getActive());
 		existingBook.setContent(book.getContent());
-		
 		authorRepository.save(existingBook);
 		return existingBook;
 	}
 
 	@Override
 	public Integer blockBook(Integer id, Boolean blockBook) {
-		
 		return authorRepository.blockBook(blockBook, id);
-		
 	}
 
 	@Override
 	public List<Book> getUnBlockBooks() {
 		return authorRepository.getAllUnBLockBooks();
-		
 	}
 
 	@Override
 	public List<Book> getBlockBooks() {
-		
 		return authorRepository.getAllBLockBooks();
 	}
-
 
 }

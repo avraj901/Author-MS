@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.author.modal.Book;
 
-
 public interface IAuthorService {
 
 	Integer saveAuthor(Book author);
@@ -13,14 +12,14 @@ public interface IAuthorService {
 	public List<Book> getAuthor();
 
 	public Optional<Book> getAuthorById(Integer id);
-	
+
 	public void deleteBook(Integer studentId);
-	
+
 	Book updateBook(Book author, Integer id);
-	
+
 	Integer blockBook(Integer id, Boolean blockBook);
-	
+
 	public List<Book> getUnBlockBooks();
-	
+
 	public List<Book> getBlockBooks();
 }
